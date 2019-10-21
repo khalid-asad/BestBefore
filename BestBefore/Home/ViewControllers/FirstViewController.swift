@@ -11,7 +11,6 @@ import UIKit
 class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     private var model: ItemModel!
-    private var myArray: [String] = ["First", "Second", "Third", "Add More"]
     private var tableView: UITableView!
 
     override func viewDidLoad() {
@@ -52,15 +51,14 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
         return model.stackableItems.count
     }
     
-    // TODO - Change colours based on expiry date
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MyCell", for: indexPath as IndexPath) as! ItemTableViewCell
         switch model.stackableItems[indexPath.row] {
-        case .item(let name, let expiryDate, let dateAdded, let image):
+        case .item(let name, let expiryDate, let dateAdded):
             cell.itemName.text = name
             cell.expiryDate.text = expiryDate
             cell.dateAdded.text = dateAdded
-            cell.itemImage.image = image
+            cell.itemImage.backgroundColor = Date().generateExpiryDateColor(expiryDate: expiryDate, dateAdded: dateAdded)
         }
         return cell
     }
@@ -98,7 +96,7 @@ extension FirstViewController {
         formatter.dateFormat = "yyyy-MM-dd"
         let dateAdded = formatter.string(from: Date())
         
-        model.addItem(name: title, dateAdded: dateAdded, expiryDate: expiry, image: nil)
+        model.addItem(name: title, dateAdded: dateAdded, expiryDate: expiry)
         
         let cell = tableView.cellForRow(at: IndexPath(row: model.stackableItems.count-1, section: 0)) as? ItemTableViewCell
         cell?.itemName.text = title
@@ -113,7 +111,7 @@ extension FirstViewController {
     }
 }
 
-// MARK: - Header
+// MARK: - Table View Header
 class CustomTableViewHeader: UITableViewHeaderFooterView {
     
     override init(reuseIdentifier: String?) {
