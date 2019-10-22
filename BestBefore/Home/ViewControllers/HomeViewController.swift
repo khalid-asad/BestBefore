@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     private var model: ItemModel!
     private var tableView: UITableView!
@@ -33,6 +33,7 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("Num: \(indexPath.row)")
         print("Value: \(model.stackableItems[indexPath.row])")
+        
         if indexPath.row == model.stackableItems.count-1 {
             showInputDialog(title: "Add Item",
                             subtitle: "Please enter the name and expiry date of the item.",
@@ -43,6 +44,11 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
                                 if let title = title, title != "", let expiry = expiry, expiry != "" {
                                     self.append(title: title, expiry: expiry, to: tableView)
                                 }
+            }
+        } else {
+            switch model.stackableItems[indexPath.row] {
+            case .item(let name, let expiryDate, let dateAdded):
+                goToItemDetails(title: name, expiry: expiryDate, dateAdded: dateAdded)
             }
         }
     }
@@ -65,7 +71,7 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
 }
 
 // MARK: - Private Methods
-extension FirstViewController {
+extension HomeViewController {
     
     private func reloadData() {
         DispatchQueue.main.async {
@@ -108,6 +114,14 @@ extension FirstViewController {
         tableView.endUpdates()
         
         reloadData()
+    }
+    
+    private func goToItemDetails(title: String, expiry: String, dateAdded: String) {
+        let itemDetailsModel = ItemDetailsModel(name: title, dateAdded: dateAdded, expiryDate: expiry)
+        let newViewController = ItemDetailsViewController(itemDetailsModel: itemDetailsModel)
+        self.present(newViewController, animated: true, completion: {
+            // TODO - Add deletion and edit behaviours to refresh stack
+        })
     }
 }
 
