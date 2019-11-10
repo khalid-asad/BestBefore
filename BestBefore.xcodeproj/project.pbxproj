@@ -13,6 +13,8 @@
 		1933C318235EA8B40015AE6D /* ItemDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1933C317235EA8B40015AE6D /* ItemDataModel.swift */; };
 		1933C31F235EAB2B0015AE6D /* ItemDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1933C31E235EAB2B0015AE6D /* ItemDetailsViewController.swift */; };
 		1933C321235EAE840015AE6D /* ItemDetailsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1933C320235EAE840015AE6D /* ItemDetailsModel.swift */; };
+		199C81892378B8F3006E082E /* Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = 199C81882378B8F3006E082E /* Component.swift */; };
+		199C818B2378BDB7006E082E /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 199C818A2378BDB7006E082E /* String+Extensions.swift */; };
 		19E51A8E2358222C00E6E1F0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E51A8D2358222C00E6E1F0 /* AppDelegate.swift */; };
 		19E51A902358222C00E6E1F0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E51A8F2358222C00E6E1F0 /* SceneDelegate.swift */; };
 		19E51A922358222C00E6E1F0 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E51A912358222C00E6E1F0 /* HomeViewController.swift */; };
@@ -41,6 +43,8 @@
 		1933C317235EA8B40015AE6D /* ItemDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemDataModel.swift; sourceTree = "<group>"; };
 		1933C31E235EAB2B0015AE6D /* ItemDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemDetailsViewController.swift; sourceTree = "<group>"; };
 		1933C320235EAE840015AE6D /* ItemDetailsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemDetailsModel.swift; sourceTree = "<group>"; };
+		199C81882378B8F3006E082E /* Component.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Component.swift; sourceTree = "<group>"; };
+		199C818A2378BDB7006E082E /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		19E51A8A2358222C00E6E1F0 /* BestBefore.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BestBefore.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		19E51A8D2358222C00E6E1F0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		19E51A8F2358222C00E6E1F0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -96,6 +100,7 @@
 			isa = PBXGroup;
 			children = (
 				1933C30E235D306B0015AE6D /* ItemTableViewCell.swift */,
+				199C81882378B8F3006E082E /* Component.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -191,6 +196,7 @@
 			children = (
 				19E51AB1235826DA00E6E1F0 /* UIViewController+Extensions.swift */,
 				1933C315235D78360015AE6D /* Date+Extensions.swift */,
+				199C818A2378BDB7006E082E /* String+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -205,6 +211,7 @@
 				19E51A862358222C00E6E1F0 /* Sources */,
 				19E51A872358222C00E6E1F0 /* Frameworks */,
 				19E51A882358222C00E6E1F0 /* Resources */,
+				1933C3222362B37D0015AE6D /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -291,12 +298,34 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		1933C3222362B37D0015AE6D /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nTAGS=\"TODO|FIXME\"\nfind \"${SRCROOT}\" \\( -type f -name \"*.swift\" \\) -print0 | xargs -0 egrep --with-filename --line-number --only-matching \"($TAGS).*\\$\" | perl -p -e \"s/($TAGS)/ warning: \\$1/\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		19E51A862358222C00E6E1F0 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				19E51A942358222C00E6E1F0 /* SecondViewController.swift in Sources */,
+				199C818B2378BDB7006E082E /* String+Extensions.swift in Sources */,
+				199C81892378B8F3006E082E /* Component.swift in Sources */,
 				1933C316235D78360015AE6D /* Date+Extensions.swift in Sources */,
 				1933C31F235EAB2B0015AE6D /* ItemDetailsViewController.swift in Sources */,
 				19E51A922358222C00E6E1F0 /* HomeViewController.swift in Sources */,

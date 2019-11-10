@@ -10,22 +10,16 @@ import Foundation
 import UIKit
 
 extension Date {
-    
-    /// Returns a color based on the number of days until an item expires
-    func generateExpiryDateColor(expiryDate: String, dateAdded: String) -> UIColor {
+        
+    /// Returns the current date as a String in yyy-MM-dd format.
+    var currentDateString: String {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
-        if let expiryDateFormatted = formatter.date(from: expiryDate),
-            let dateAddedFormatted = formatter.date(from: dateAdded),
-            let diffInDays = Calendar.current.dateComponents([.day], from: dateAddedFormatted, to: expiryDateFormatted).day {
-            if abs(diffInDays) >= 14 {
-                return .green
-            } else if abs(diffInDays) >= 7 {
-                return .orange
-            } else {
-                return .red
-            }
-        }
-        return .blue
+        return formatter.string(from: self)
+    }
+    
+    /// Returns the difference in date from today to the date provided in an optional Integer.
+    var differenceInDaysFromToday: Int? {
+        return Calendar.current.dateComponents([.day], from: Date(), to: self).day
     }
 }

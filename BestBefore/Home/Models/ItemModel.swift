@@ -39,3 +39,17 @@ final class ItemModel {
         stackableItem.remove(at: row)
     }
 }
+
+// MARK: - Computer Properties
+extension ItemModel {
+    
+    func isExpired(item: StackableItems) -> Bool {
+        switch item {
+        case .item(_, _, let expiryDate):
+            guard let expiryDate = expiryDate.toDate,
+                let differenceInDays = expiryDate.differenceInDaysFromToday,
+                differenceInDays > 0 else { return true }
+            return false
+        }
+    }
+}

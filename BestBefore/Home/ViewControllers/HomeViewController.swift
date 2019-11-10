@@ -21,13 +21,9 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         setupTableView()
     }
 
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 100
-    }
-    
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let header = tableView.dequeueReusableCell(withIdentifier: "headerID") as? CustomTableViewHeader
-        return header
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        updateHeaderViewHeight(for: tableView.tableHeaderView)
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -64,7 +60,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             cell.itemName.text = name
             cell.expiryDate.text = expiryDate
             cell.dateAdded.text = dateAdded
-            cell.itemImage.backgroundColor = Date().generateExpiryDateColor(expiryDate: expiryDate, dateAdded: dateAdded)
+            cell.itemImage.backgroundColor = generateExpiryDateColor(from: dateAdded)
         }
         return cell
     }
@@ -79,14 +75,23 @@ extension HomeViewController {
         }
     }
     
+    private func updateHeaderViewHeight(for header: UIView?) {
+        guard let header = header else { return }
+        header.frame.size.height = header.systemLayoutSizeFitting(CGSize(width: view.bounds.width - 32.0, height: 0)).height
+    }
+    
     private func setupTableView() {
         let barHeight: CGFloat = UIApplication.shared.statusBarFrame.size.height
         let displayWidth: CGFloat = self.view.frame.width
         let displayHeight: CGFloat = self.view.frame.height
         
         tableView = UITableView(frame: CGRect(x: 0, y: barHeight, width: displayWidth, height: displayHeight))
-        tableView.register(CustomTableViewHeader.self, forHeaderFooterViewReuseIdentifier: "headerID")
         tableView.register(ItemTableViewCell.classForCoder(), forCellReuseIdentifier: "MyCell")
+        
+        let headerView = Component(frame: .zero)
+        headerView.configure(text: "Items")
+        tableView.tableHeaderView = headerView
+        tableView.tableHeaderView?.backgroundColor = .white
         
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 44
@@ -98,9 +103,14 @@ extension HomeViewController {
     }
     
     private func append(title: String, expiry: String, to tableView: UITableView) {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd"
-        let dateAdded = formatter.string(from: Date())
+        guard let expiryDate = expiry.toDate,
+            let differenceInDays = expiryDate.differenceInDaysFromToday,
+            differenceInDays > 0 else {
+                print("Error: This item is already expired")
+                return
+        }
+        
+        let dateAdded = Date().currentDateString
         
         model.addItem(name: title, dateAdded: dateAdded, expiryDate: expiry)
         
@@ -123,17 +133,18 @@ extension HomeViewController {
             // TODO - Add deletion and edit behaviours to refresh stack
         })
     }
-}
-
-// MARK: - Table View Header
-class CustomTableViewHeader: UITableViewHeaderFooterView {
     
-    override init(reuseIdentifier: String?) {
-        super.init(reuseIdentifier: reuseIdentifier)
-        contentView.backgroundColor = .orange
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    func generateExpiryDateColor(from expiryDate: String) -> UIColor {
+        if let expiryDateFormatted = expiryDate.toDate,
+            let diffInDays = expiryDateFormatted.differenceInDaysFromToday {
+            if diffInDays >= 14 {
+                return .green
+            } else if diffInDays >= 7 {
+                return .orange
+            } else {
+                return .red
+            }
+        }
+        return .blue
     }
 }
