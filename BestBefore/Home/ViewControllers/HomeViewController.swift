@@ -16,7 +16,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = Localization.itemsTabTitle.rawValue
+        title = StringKey.itemsTabTitle.localized
         
         model = ItemModel()
         
@@ -40,10 +40,10 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                     let differenceInDays = expiryDate.differenceInDaysFromToday,
                     differenceInDays > 0
                 else {
-                    print(Localization.error.rawValue + Localization.invalidExpiryTitle.rawValue)
+                    print(StringKey.error.localized + StringKey.invalidExpiryTitle.localized)
                     self.showErrorMessage(
-                        title: Localization.invalidExpiryTitle.rawValue,
-                        message: Localization.invalidExpiryMessage.rawValue
+                        title: StringKey.invalidExpiryTitle.localized,
+                        message: StringKey.invalidExpiryMessage.localized
                     )
                     tableView.deselectRow(at: indexPath, animated: true)
                     return
@@ -98,7 +98,7 @@ extension HomeViewController {
         tableView.register(ItemTableViewCell.classForCoder(), forCellReuseIdentifier: "MyCell")
         
         let headerView = Component(frame: .zero)
-        headerView.configure(text: Localization.itemsTabTitle.rawValue)
+        headerView.configure(text: StringKey.itemsTabTitle.localized)
         tableView.tableHeaderView = headerView
         tableView.tableHeaderView?.backgroundColor = .white
         
@@ -113,12 +113,12 @@ extension HomeViewController {
     
     private func presentItemAdditionScreen(completion: @escaping (String?, String?) -> Void) {
         showInputDialog(
-            title: Localization.addItemTitle.rawValue,
-            subtitle: Localization.addItemSubtitle.rawValue,
-            actionTitle: Localization.addItemActionTitle.rawValue,
-            cancelTitle: Localization.addItemCancelTitle.rawValue,
-            textField1PlaceHolder: Localization.addItemTextFieldPlaceholder1.rawValue,
-            textField2PlaceHolder: Localization.addItemTextFieldPlaceholder2.rawValue) { (title: String?, expiry: String?) in
+            title: StringKey.addItemTitle.localized,
+            subtitle: StringKey.addItemSubtitle.localized,
+            actionTitle: StringKey.addActionTitle.localized,
+            cancelTitle: StringKey.cancelTitle.localized,
+            textField1PlaceHolder: StringKey.addItemTextFieldPlaceholder1.localized,
+            textField2PlaceHolder: StringKey.addItemTextFieldPlaceholder2.localized) { (title: String?, expiry: String?) in
                 if let title = title, title != "", let expiry = expiry, expiry != "" {
                     completion(title, expiry)
                     return

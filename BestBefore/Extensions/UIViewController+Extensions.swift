@@ -14,8 +14,8 @@ extension UIViewController {
     /// A modal that takes input from 2 TextFields to add an item
     func showInputDialog(title: String? = nil,
                          subtitle: String? = nil,
-                         actionTitle: String? = "Add",
-                         cancelTitle: String? = "Cancel",
+                         actionTitle: String? = StringKey.addActionTitle.localized,
+                         cancelTitle: String? = StringKey.cancelTitle.localized,
                          textField1PlaceHolder: String,
                          textField2PlaceHolder: String? = nil,
                          inputKeyboardType: UIKeyboardType = .default,
