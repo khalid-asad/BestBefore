@@ -50,4 +50,15 @@ extension UIViewController {
         
         self.present(alert, animated: true, completion: nil)
     }
+    
+    /// A modal that takes input from 2 TextFields to add an item
+    func showErrorMessage(title: String,
+                          message: String,
+                          buttonTitle: String? = "OK",
+                          inputKeyboardType: UIKeyboardType = .default,
+                          completion: ((UIAlertAction) -> Swift.Void)? = nil) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: buttonTitle, style: .default, handler: completion))
+        self.present(alert, animated: true, completion: nil)
+    }
 }

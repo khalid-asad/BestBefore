@@ -16,6 +16,8 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        title = Localization.itemsTabTitle.rawValue
+        
         model = ItemModel()
         
         setupTableView()
@@ -31,16 +33,23 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         print("Value: \(model.stackableItems[indexPath.row])")
         
         if indexPath.row == model.stackableItems.count-1 {
-            showInputDialog(title: "Add Item",
-                            subtitle: "Please enter the name and expiry date of the item.",
-                            actionTitle: "Add",
-                            cancelTitle: "Cancel",
-                            textField1PlaceHolder: "Name",
-                            textField2PlaceHolder: "Expiry Date") { [unowned self] (title: String?, expiry: String?) in
-                                if let title = title, title != "", let expiry = expiry, expiry != "" {
-                                    self.append(title: title, expiry: expiry, to: tableView)
-                                }
-            }
+            presentItemAdditionScreen(completion: { [unowned self] (title, expiry) in
+                guard let title = title,
+                    let expiry = expiry,
+                    let expiryDate = expiry.toDate,
+                    let differenceInDays = expiryDate.differenceInDaysFromToday,
+                    differenceInDays > 0
+                else {
+                    print(Localization.error.rawValue + Localization.invalidExpiryTitle.rawValue)
+                    self.showErrorMessage(
+                        title: Localization.invalidExpiryTitle.rawValue,
+                        message: Localization.invalidExpiryMessage.rawValue
+                    )
+                    tableView.deselectRow(at: indexPath, animated: true)
+                    return
+                }
+                self.append(title: title, expiry: expiry, to: tableView)
+            })
         } else {
             switch model.stackableItems[indexPath.row] {
             case .item(let name, let expiryDate, let dateAdded):
@@ -89,7 +98,7 @@ extension HomeViewController {
         tableView.register(ItemTableViewCell.classForCoder(), forCellReuseIdentifier: "MyCell")
         
         let headerView = Component(frame: .zero)
-        headerView.configure(text: "Items")
+        headerView.configure(text: Localization.itemsTabTitle.rawValue)
         tableView.tableHeaderView = headerView
         tableView.tableHeaderView?.backgroundColor = .white
         
@@ -102,14 +111,24 @@ extension HomeViewController {
         self.view.addSubview(tableView)
     }
     
-    private func append(title: String, expiry: String, to tableView: UITableView) {
-        guard let expiryDate = expiry.toDate,
-            let differenceInDays = expiryDate.differenceInDaysFromToday,
-            differenceInDays > 0 else {
-                print("Error: This item is already expired")
+    private func presentItemAdditionScreen(completion: @escaping (String?, String?) -> Void) {
+        showInputDialog(
+            title: Localization.addItemTitle.rawValue,
+            subtitle: Localization.addItemSubtitle.rawValue,
+            actionTitle: Localization.addItemActionTitle.rawValue,
+            cancelTitle: Localization.addItemCancelTitle.rawValue,
+            textField1PlaceHolder: Localization.addItemTextFieldPlaceholder1.rawValue,
+            textField2PlaceHolder: Localization.addItemTextFieldPlaceholder2.rawValue) { (title: String?, expiry: String?) in
+                if let title = title, title != "", let expiry = expiry, expiry != "" {
+                    completion(title, expiry)
+                    return
+                }
+                completion(nil, nil)
                 return
         }
-        
+    }
+    
+    private func append(title: String, expiry: String, to tableView: UITableView) {
         let dateAdded = Date().currentDateString
         
         model.addItem(name: title, dateAdded: dateAdded, expiryDate: expiry)
@@ -134,7 +153,7 @@ extension HomeViewController {
         })
     }
     
-    func generateExpiryDateColor(from expiryDate: String) -> UIColor {
+    private func generateExpiryDateColor(from expiryDate: String) -> UIColor {
         if let expiryDateFormatted = expiryDate.toDate,
             let diffInDays = expiryDateFormatted.differenceInDaysFromToday {
             if diffInDays >= 14 {
