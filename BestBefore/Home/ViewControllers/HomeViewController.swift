@@ -18,6 +18,10 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         title = StringKey.itemsTabTitle.localized
         
+        if #available(iOS 13, *) {
+            UINavigationBarAppearance().configureNavigationBar()
+        }
+        
         model = ItemModel()
         
         setupTableView()
