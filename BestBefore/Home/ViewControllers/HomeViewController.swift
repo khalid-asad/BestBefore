@@ -21,6 +21,18 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         model = ItemModel()
         
         setupTableView()
+        
+        model.fetchData(completion: { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success:
+                self.reloadData()
+            case .failure:
+                return
+            case .fetching:
+                print("Fetching data")
+            }
+        })
     }
 
     override func viewWillLayoutSubviews() {
@@ -132,7 +144,7 @@ extension HomeViewController {
         let dateAdded = Date().currentDateString
         
         model.addItem(name: title, dateAdded: dateAdded, expiryDate: expiry)
-        
+                
         let cell = tableView.cellForRow(at: IndexPath(row: model.stackableItems.count-1, section: 0)) as? ItemTableViewCell
         cell?.itemName.text = title
         cell?.expiryDate.text = expiry

@@ -25,6 +25,8 @@ public enum StringKey: String {
     case addItemTextFieldPlaceholder1 = "Name"
     case addItemTextFieldPlaceholder2 = "Expiry Date"
     case addMoreText = "Add More"
+    case baseURL = "https://gist.github.com/khalid-asad/"
+    case itemJSONPath = "726740e12caa39c1f71d49a2c5503e06/raw/86bb875bafaeffe3dccb26c34667711bba813d18/items.json"
     
     var language: Language {
         if Locale.preferredLanguages[0].starts(with: "fr") {
@@ -49,6 +51,8 @@ public enum StringKey: String {
             case .addItemTextFieldPlaceholder1: return "Nom"
             case .addItemTextFieldPlaceholder2: return "Date d'expiration"
             case .addMoreText: return "Ajouter Plus De"
+            case .baseURL: return "https://gist.github.com/khalid-asad/"
+            case .itemJSONPath: return "726740e12caa39c1f71d49a2c5503e06/raw/86bb875bafaeffe3dccb26c34667711bba813d18/items.json"
             }
         default:
             return self.rawValue
