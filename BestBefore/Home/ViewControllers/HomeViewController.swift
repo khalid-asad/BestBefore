@@ -54,6 +54,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             })
         } else {
             let itemInfo = model.stackableItems[indexPath.row]
+            tableView.deselectRow(at: indexPath, animated: true)
             goToItemDetails(title: itemInfo.name, expiry: itemInfo.expiryDate, dateAdded: itemInfo.dateAdded)
         }
     }
@@ -63,12 +64,12 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "MyCell", for: indexPath as IndexPath) as! ItemTableViewCell
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "MyCell", for: indexPath as IndexPath) as? ItemTableViewCell else { return UITableViewCell() }
         let itemInfo = model.stackableItems[indexPath.row]
         cell.itemNameLabel.text = itemInfo.name
         cell.expiryDateLabel.text = itemInfo.expiryDate
         cell.dateAddedLabel.text = itemInfo.dateAdded
-        cell.itemImageView.backgroundColor = generateExpiryDateColor(from: itemInfo.dateAdded)
+        cell.itemImageView.backgroundColor = generateExpiryDateColor(from: itemInfo.expiryDate)
         return cell
     }
 }
@@ -171,6 +172,8 @@ extension HomeViewController {
             if diffInDays >= 14 {
                 return .green
             } else if diffInDays >= 7 {
+                return .yellow
+            } else if diffInDays >= 1 {
                 return .orange
             } else {
                 return .red
