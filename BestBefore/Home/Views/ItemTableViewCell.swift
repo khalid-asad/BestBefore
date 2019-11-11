@@ -21,13 +21,17 @@ class ItemTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
         itemImageView.backgroundColor = .blue
-
+        itemImageView.setRoundedCorners(radius: 3)
+        
         [itemImageView, itemNameLabel, expiryDateLabel, dateAddedLabel].forEach() {
             $0.translatesAutoresizingMaskIntoConstraints = false
             contentView.addSubview($0)
         }
         
-        itemNameLabel.font = .boldSystemFont(ofSize: 20)
+        itemNameLabel.font = ThemeManager().titleFont 
+        [expiryDateLabel, dateAddedLabel].forEach() {
+            $0.font = ThemeManager().subTitleFont
+        }
         
         let viewsDict = [
             "itemImage": itemImageView,

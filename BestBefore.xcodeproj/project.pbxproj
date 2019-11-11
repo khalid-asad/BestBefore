@@ -19,6 +19,7 @@
 		199C81912378DBE9006E082E /* PlatformCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 199C81902378DBE9006E082E /* PlatformCommon.framework */; };
 		199C81922378DBE9006E082E /* PlatformCommon.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 199C81902378DBE9006E082E /* PlatformCommon.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		199C81972378DF56006E082E /* ItemInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 199C81962378DF56006E082E /* ItemInfo.swift */; };
+		199C81A923791F4A006E082E /* ThemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 199C81A823791F4A006E082E /* ThemeManager.swift */; };
 		19E51A8E2358222C00E6E1F0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E51A8D2358222C00E6E1F0 /* AppDelegate.swift */; };
 		19E51A902358222C00E6E1F0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E51A8F2358222C00E6E1F0 /* SceneDelegate.swift */; };
 		19E51A922358222C00E6E1F0 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E51A912358222C00E6E1F0 /* HomeViewController.swift */; };
@@ -66,6 +67,7 @@
 		199C818D2378CD33006E082E /* StringKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringKey.swift; sourceTree = "<group>"; };
 		199C81902378DBE9006E082E /* PlatformCommon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PlatformCommon.framework; path = Carthage/Build/iOS/PlatformCommon.framework; sourceTree = "<group>"; };
 		199C81962378DF56006E082E /* ItemInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemInfo.swift; sourceTree = "<group>"; };
+		199C81A823791F4A006E082E /* ThemeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeManager.swift; sourceTree = "<group>"; };
 		19E51A8A2358222C00E6E1F0 /* BestBefore.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BestBefore.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		19E51A8D2358222C00E6E1F0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		19E51A8F2358222C00E6E1F0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -186,6 +188,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		199C81A723791F3A006E082E /* ThemeManager */ = {
+			isa = PBXGroup;
+			children = (
+				199C81A823791F4A006E082E /* ThemeManager.swift */,
+			);
+			path = ThemeManager;
+			sourceTree = "<group>";
+		};
 		19E51A812358222C00E6E1F0 = {
 			isa = PBXGroup;
 			children = (
@@ -208,6 +218,7 @@
 		19E51A8C2358222C00E6E1F0 /* BestBefore */ = {
 			isa = PBXGroup;
 			children = (
+				199C81A723791F3A006E082E /* ThemeManager */,
 				199C818C2378CD23006E082E /* Localization */,
 				1933C31A235EA94E0015AE6D /* ItemDetails */,
 				19E51AB323582A6E00E6E1F0 /* Extensions */,
@@ -395,6 +406,7 @@
 				19E51AB2235826DA00E6E1F0 /* UIViewController+Extensions.swift in Sources */,
 				19E51A8E2358222C00E6E1F0 /* AppDelegate.swift in Sources */,
 				199C81972378DF56006E082E /* ItemInfo.swift in Sources */,
+				199C81A923791F4A006E082E /* ThemeManager.swift in Sources */,
 				1933C30F235D306B0015AE6D /* ItemTableViewCell.swift in Sources */,
 				1933C318235EA8B40015AE6D /* ItemDataModel.swift in Sources */,
 				1933C312235D35950015AE6D /* ItemModel.swift in Sources */,

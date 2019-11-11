@@ -20,7 +20,7 @@ class Component: UIView {
         
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
-        label.font = .boldSystemFont(ofSize: 40)
+        label.font = ThemeManager().headerFont
         label.textColor = .black
         
         NSLayoutConstraint.activate([
