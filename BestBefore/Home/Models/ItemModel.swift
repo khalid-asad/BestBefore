@@ -12,15 +12,15 @@ import PlatformCommon
 
 final class ItemModel {
     
-    private var stackableItem: [ItemModel.StackableItems] = [
-        .item(name: "Broccoli", dateAdded: "2019-10-20", expiryDate: "2019-10-27"),
-        .item(name: "Spinach", dateAdded: "2019-10-20", expiryDate: "2019-10-27"),
-        .item(name: "Cheese", dateAdded: "2019-10-20", expiryDate: "2019-11-20"),
-        .item(name: "Onion", dateAdded: "2019-10-20", expiryDate: "2019-11-04"),
-        .item(name: StringKey.addMoreText.localized, dateAdded: "", expiryDate: "")
+    private var stackableItem: [ItemInfo] = [
+        ItemInfo(name: "Broccoli", dateAdded: "2019-10-20", expiryDate: "2019-10-27"),
+        ItemInfo(name: "Spinach", dateAdded: "2019-10-20", expiryDate: "2019-10-27"),
+        ItemInfo(name: "Cheese", dateAdded: "2019-10-20", expiryDate: "2019-11-20"),
+        ItemInfo(name: "Onion", dateAdded: "2019-10-20", expiryDate: "2019-11-04"),
+        ItemInfo(name: StringKey.addMoreText.localized, dateAdded: "", expiryDate: "")
     ]
     
-    var stackableItems: [ItemModel.StackableItems] {
+    var stackableItems: [ItemInfo] {
         return stackableItem
     }
     
@@ -46,7 +46,7 @@ final class ItemModel {
     }
     
     public func addItem(name: String, dateAdded: String, expiryDate: String) {
-        stackableItem[stackableItem.count-1] = .item(name: name, dateAdded: dateAdded, expiryDate: expiryDate)
+        stackableItem[stackableItem.count-1] = ItemInfo(name: name, dateAdded: dateAdded, expiryDate: expiryDate)
         sortItems()
         stackableItem.append(addMoreStackableItem)
     }
@@ -77,9 +77,7 @@ extension ItemModel {
             
             dump(data)
                         
-            self.stackableItem = data
-                .sorted { $0 < $1 }
-                .compactMap() { .item(name: $0.name, dateAdded: $0.dateAdded, expiryDate: $0.expiryDate) }
+            self.stackableItem = data.sorted { $0 < $1 }
             self.stackableItem.append(self.addMoreStackableItem)
             
             completion(.success)
@@ -104,8 +102,8 @@ extension ItemModel {
 // MARK: - Private Methods
 extension ItemModel {
     
-    private var addMoreStackableItem: ItemModel.StackableItems {
-        return .item(name: StringKey.addMoreText.localized, dateAdded: "", expiryDate: "")
+    private var addMoreStackableItem: ItemInfo {
+        return ItemInfo(name: StringKey.addMoreText.localized, dateAdded: "", expiryDate: "")
     }
     
     private func sortItems() {

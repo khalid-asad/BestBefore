@@ -12,33 +12,35 @@ import UIKit
 // MARK: - Table View Cell
 class ItemTableViewCell: UITableViewCell {
 
-    let itemImage = UIImageView()
-    let itemName = UILabel()
-    let expiryDate = UILabel()
-    let dateAdded = UILabel()
+    let itemImageView = UIImageView()
+    let itemNameLabel = UILabel()
+    let expiryDateLabel = UILabel()
+    let dateAddedLabel = UILabel()
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
-        itemImage.backgroundColor = .blue
+        itemImageView.backgroundColor = .blue
 
-        [itemImage, itemName, expiryDate, dateAdded].forEach() {
+        [itemImageView, itemNameLabel, expiryDateLabel, dateAddedLabel].forEach() {
             $0.translatesAutoresizingMaskIntoConstraints = false
             contentView.addSubview($0)
         }
         
+        itemNameLabel.font = .boldSystemFont(ofSize: 20)
+        
         let viewsDict = [
-            "image": itemImage,
-            "username": itemName,
-            "message": expiryDate,
-            "labTime": dateAdded,
+            "itemImage": itemImageView,
+            "itemName": itemNameLabel,
+            "expiryDate": expiryDateLabel,
+            "dateAdded": dateAddedLabel,
         ]
 
-        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-[image(10)]", options: [], metrics: nil, views: viewsDict))
-        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:[labTime]-|", options: [], metrics: nil, views: viewsDict))
-        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-[username]-[message]-|", options: [], metrics: nil, views: viewsDict))
-        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-[username]-[image(10)]-|", options: [], metrics: nil, views: viewsDict))
-        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-[message]-[labTime]-|", options: [], metrics: nil, views: viewsDict))
+        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-[itemImage(10)]", options: [], metrics: nil, views: viewsDict))
+        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:[expiryDate]-|", options: [], metrics: nil, views: viewsDict))
+        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-[itemName]-[dateAdded]-|", options: [], metrics: nil, views: viewsDict))
+        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-[itemName]-[itemImage(10)]-|", options: [], metrics: nil, views: viewsDict))
+        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-[dateAdded]-(>=30)-[expiryDate]-|", options: [], metrics: nil, views: viewsDict))
     }
     
     required init?(coder aDecoder: NSCoder) {

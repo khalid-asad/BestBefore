@@ -22,17 +22,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         setupTableView()
         
-        model.fetchData(completion: { [weak self] result in
-            guard let self = self else { return }
-            switch result {
-            case .success:
-                self.reloadData()
-            case .failure:
-                return
-            case .fetching:
-                print("Fetching data")
-            }
-        })
+        fetchData()
     }
 
     override func viewWillLayoutSubviews() {
@@ -63,10 +53,8 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                 self.append(title: title, expiry: expiry, to: tableView)
             })
         } else {
-            switch model.stackableItems[indexPath.row] {
-            case .item(let name, let expiryDate, let dateAdded):
-                goToItemDetails(title: name, expiry: expiryDate, dateAdded: dateAdded)
-            }
+            let itemInfo = model.stackableItems[indexPath.row]
+            goToItemDetails(title: itemInfo.name, expiry: itemInfo.expiryDate, dateAdded: itemInfo.dateAdded)
         }
     }
     
@@ -76,13 +64,11 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MyCell", for: indexPath as IndexPath) as! ItemTableViewCell
-        switch model.stackableItems[indexPath.row] {
-        case .item(let name, let expiryDate, let dateAdded):
-            cell.itemName.text = name
-            cell.expiryDate.text = expiryDate
-            cell.dateAdded.text = dateAdded
-            cell.itemImage.backgroundColor = generateExpiryDateColor(from: dateAdded)
-        }
+        let itemInfo = model.stackableItems[indexPath.row]
+        cell.itemNameLabel.text = itemInfo.name
+        cell.expiryDateLabel.text = itemInfo.expiryDate
+        cell.dateAddedLabel.text = itemInfo.dateAdded
+        cell.itemImageView.backgroundColor = generateExpiryDateColor(from: itemInfo.dateAdded)
         return cell
     }
 }
@@ -94,6 +80,20 @@ extension HomeViewController {
         DispatchQueue.main.async {
             self.tableView.reloadData()
         }
+    }
+    
+    private func fetchData() {
+        model.fetchData(completion: { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success:
+                self.reloadData()
+            case .failure:
+                return
+            case .fetching:
+                print("Fetching data")
+            }
+        })
     }
     
     private func updateHeaderViewHeight(for header: UIView?) {
@@ -146,9 +146,9 @@ extension HomeViewController {
         model.addItem(name: title, dateAdded: dateAdded, expiryDate: expiry)
                 
         let cell = tableView.cellForRow(at: IndexPath(row: model.stackableItems.count-1, section: 0)) as? ItemTableViewCell
-        cell?.itemName.text = title
-        cell?.expiryDate.text = expiry
-        cell?.dateAdded.text = dateAdded
+        cell?.itemNameLabel.text = title
+        cell?.expiryDateLabel.text = expiry
+        cell?.dateAddedLabel.text = dateAdded
         
         tableView.beginUpdates()
         tableView.insertRows(at: [IndexPath(row: model.stackableItems.count-1, section: 0)], with: .automatic)
