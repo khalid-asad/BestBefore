@@ -61,4 +61,45 @@ extension UIViewController {
         alert.addAction(UIAlertAction(title: buttonTitle, style: .default, handler: completion))
         self.present(alert, animated: true, completion: nil)
     }
+    
+    @available(iOS 13, *)
+    func customizeNavigationBar() {
+//        navigationItem.setLeftBarButton(.init(barButtonSystemItem: .cancel, target: nil, action: nil), animated: true)
+//        navigationItem.setRightBarButton(.init(barButtonSystemItem: .done, target: nil, action: nil), animated: true)
+
+//        navigationItem.searchController = searchController
+
+        let navBarAppearance = UINavigationBarAppearance()
+
+        // Call this first otherwise it will override your customizations
+        navBarAppearance.configureWithDefaultBackground()
+
+        let buttonAppearance = UIBarButtonItemAppearance()
+        let titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.black]
+        buttonAppearance.normal.titleTextAttributes = titleTextAttributes
+
+        navBarAppearance.titleTextAttributes = [
+            .foregroundColor : UIColor.black, // Navigation bar title color
+            .font : ThemeManager().headerFont // Navigation bar title font
+        ]
+
+        navBarAppearance.largeTitleTextAttributes = [
+            .foregroundColor : UIColor.black, // Navigation bar title color
+        ]
+
+        // appearance.backgroundColor = UIColor.systemGray // Navigation bar bg color
+        // appearance.titlePositionAdjustment = UIOffset(horizontal: 0, vertical: 8) // Only works on non large title
+
+        let transNavBarAppearance = navBarAppearance.copy()
+        transNavBarAppearance.configureWithTransparentBackground()
+        navigationController?.navigationBar.standardAppearance = navBarAppearance
+        navigationController?.navigationBar.compactAppearance = navBarAppearance
+        navigationController?.navigationBar.scrollEdgeAppearance = transNavBarAppearance
+
+//        searchController.navigationItem.standardAppearance = navBarAppearance
+//        searchController.navigationItem.compactAppearance = navBarAppearance
+//        searchController.navigationItem.scrollEdgeAppearance = transNavBarAppearance
+        
+        navigationController?.navigationBar.prefersLargeTitles = true // Activate large title
+    }
 }

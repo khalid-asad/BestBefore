@@ -19,7 +19,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         title = StringKey.itemsTabTitle.localized
         
         if #available(iOS 13, *) {
-            UINavigationBarAppearance().configureNavigationBar()
+            customizeNavigationBar()
         }
         
         model = ItemModel()
@@ -27,11 +27,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         setupTableView()
         
         fetchData()
-    }
-
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-        updateHeaderViewHeight(for: tableView.tableHeaderView)
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -101,11 +96,6 @@ extension HomeViewController {
         })
     }
     
-    private func updateHeaderViewHeight(for header: UIView?) {
-        guard let header = header else { return }
-        header.frame.size.height = header.systemLayoutSizeFitting(CGSize(width: view.bounds.width - 32.0, height: 0)).height
-    }
-    
     private func setupTableView() {
         let barHeight: CGFloat = UIApplication.shared.statusBarFrame.size.height
         let displayWidth: CGFloat = self.view.frame.width
@@ -113,12 +103,7 @@ extension HomeViewController {
         
         tableView = UITableView(frame: CGRect(x: 0, y: barHeight, width: displayWidth, height: displayHeight))
         tableView.register(ItemTableViewCell.classForCoder(), forCellReuseIdentifier: "MyCell")
-        
-        let headerView = Component(frame: .zero)
-        headerView.configure(text: StringKey.itemsTabTitle.localized)
-        tableView.tableHeaderView = headerView
-        tableView.tableHeaderView?.backgroundColor = .white
-        
+
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 44
         
@@ -165,9 +150,12 @@ extension HomeViewController {
     private func goToItemDetails(title: String, expiry: String, dateAdded: String) {
         let itemDetailsModel = ItemDetailsModel(name: title, dateAdded: dateAdded, expiryDate: expiry)
         let newViewController = ItemDetailsViewController(itemDetailsModel: itemDetailsModel)
-        self.present(newViewController, animated: true, completion: {
-            // TODO - Add deletion and edit behaviours to refresh stack
-        })
+        newViewController.modalPresentationStyle = .fullScreen
+        navigationController?.present(newViewController, animated: true, completion: nil)
+
+//        self.present(newViewController, animated: true, completion: {
+//            // TODO - Add deletion and edit behaviours to refresh stack
+//        })
     }
     
     private func generateExpiryDateColor(from expiryDate: String) -> UIColor {

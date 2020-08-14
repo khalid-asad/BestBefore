@@ -16,14 +16,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = HomeViewController()
+        window?.rootViewController = UINavigationController(rootViewController: HomeViewController())
         window?.backgroundColor = .white
         window?.makeKeyAndVisible()
         
-        let navigationBarAppearace = UINavigationBar.appearance()
-        navigationBarAppearace.tintColor = .white
-        navigationBarAppearace.barTintColor = .white
-        navigationBarAppearace.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+//        let navigationBarAppearance = UINavigationBar.appearance()
+//        navigationBarAppearance.barStyle = .default
+//        navigationBarAppearance.tintColor = .white
+//        navigationBarAppearance.barTintColor = .white
+//        navigationBarAppearance.backgroundColor = .white
+//        navigationBarAppearance.prefersLargeTitles = true
+//        if #available(iOS 13.0, *) {
+//            navigationBarAppearance.scrollEdgeAppearance = .none
+//            navigationBarAppearance.compactAppearance = .none
+//        } else {
+//            // Fallback on earlier versions
+//        }
+//        navigationBarAppearance.isTranslucent = true
+//        navigationBarAppearance.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
+//        navigationBarAppearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
 
         return true
     }

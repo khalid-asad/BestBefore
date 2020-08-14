@@ -20,7 +20,6 @@
 		199C81922378DBE9006E082E /* PlatformCommon.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 199C81902378DBE9006E082E /* PlatformCommon.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		199C81972378DF56006E082E /* ItemInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 199C81962378DF56006E082E /* ItemInfo.swift */; };
 		199C81A923791F4A006E082E /* ThemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 199C81A823791F4A006E082E /* ThemeManager.swift */; };
-		19CEBCE723792BC500634E60 /* UINavigationBarAppearance+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19CEBCE623792BC500634E60 /* UINavigationBarAppearance+Extensions.swift */; };
 		19E51A8E2358222C00E6E1F0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E51A8D2358222C00E6E1F0 /* AppDelegate.swift */; };
 		19E51A902358222C00E6E1F0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E51A8F2358222C00E6E1F0 /* SceneDelegate.swift */; };
 		19E51A922358222C00E6E1F0 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E51A912358222C00E6E1F0 /* HomeViewController.swift */; };
@@ -68,7 +67,6 @@
 		199C81902378DBE9006E082E /* PlatformCommon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PlatformCommon.framework; path = Carthage/Build/iOS/PlatformCommon.framework; sourceTree = "<group>"; };
 		199C81962378DF56006E082E /* ItemInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemInfo.swift; sourceTree = "<group>"; };
 		199C81A823791F4A006E082E /* ThemeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeManager.swift; sourceTree = "<group>"; };
-		19CEBCE623792BC500634E60 /* UINavigationBarAppearance+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationBarAppearance+Extensions.swift"; sourceTree = "<group>"; };
 		19E51A8A2358222C00E6E1F0 /* BestBefore.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BestBefore.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		19E51A8D2358222C00E6E1F0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		19E51A8F2358222C00E6E1F0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -248,7 +246,6 @@
 				19E51AB1235826DA00E6E1F0 /* UIViewController+Extensions.swift */,
 				1933C315235D78360015AE6D /* Date+Extensions.swift */,
 				199C818A2378BDB7006E082E /* String+Extensions.swift */,
-				19CEBCE623792BC500634E60 /* UINavigationBarAppearance+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -396,7 +393,6 @@
 			files = (
 				19E51A942358222C00E6E1F0 /* SecondViewController.swift in Sources */,
 				199C818B2378BDB7006E082E /* String+Extensions.swift in Sources */,
-				19CEBCE723792BC500634E60 /* UINavigationBarAppearance+Extensions.swift in Sources */,
 				199C81892378B8F3006E082E /* Component.swift in Sources */,
 				1933C316235D78360015AE6D /* Date+Extensions.swift in Sources */,
 				1933C31F235EAB2B0015AE6D /* ItemDetailsViewController.swift in Sources */,
@@ -494,7 +490,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -548,7 +544,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -568,6 +564,7 @@
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = BestBefore/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -589,6 +586,7 @@
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = BestBefore/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

@@ -33,7 +33,9 @@ extension ItemDetailsViewController {
     private func setUpViews() {
         view = UIView()
         view.backgroundColor = .lightGray
-
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(dismissVC))
+        
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
@@ -50,5 +52,9 @@ extension ItemDetailsViewController {
             label.text = string
             stackView.addArrangedSubview(label)
         }
+    }
+    
+    @objc func dismissVC() {
+        self.dismiss(animated: true, completion: nil)
     }
 }
