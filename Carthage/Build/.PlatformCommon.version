@@ -1,10 +1,10 @@
 {
-  "commitish" : "c8b83596f44f03199aa76caac1dcfdb6c75b793b",
+  "commitish" : "0f89582f374db54682f5d9d4dbf3b8fbcb554e9d",
   "iOS" : [
     {
       "name" : "PlatformCommon",
-      "hash" : "cfea8aa021345a14b8da316f7262e187b78df1fe219319fcdbb7ae1552c8eed3",
-      "swiftToolchainVersion" : "5.1 (swiftlang-1100.0.270.13 clang-1100.0.33.7)"
+      "hash" : "a117e9995d5eb0254a2f5cfa89f246b8b0db83708679de92d0486a7af9e32d1c",
+      "swiftToolchainVersion" : "5.2.4 (swiftlang-1103.0.32.9 clang-1103.0.32.53)"
     }
   ]
 }
