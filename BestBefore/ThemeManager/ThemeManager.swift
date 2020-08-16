@@ -6,7 +6,7 @@
 //  Copyright © 2019 Khalid Asad. All rights reserved.
 //
 
-import Foundation
+import enum PlatformCommon.MaterialColor
 import UIKit
 
 struct ThemeManager {
@@ -41,30 +41,30 @@ struct ThemeManager {
     
     // MARK: - Colors
     var darkColor: UIColor {
-        return UIColor(red: 33/255, green: 33/255, blue: 33/255, alpha: 1.0) /* #212121 */
+        MaterialColor.gray[.o800]
     }
     
     var lightColor: UIColor {
-        return .white
+        .white
     }
     
     var primaryFontColor: UIColor {
-        return isDarkModeEnabled ? lightColor : darkColor
+        isDarkModeEnabled ? lightColor : darkColor
     }
     
     var secondaryFontColor: UIColor {
-        return isDarkModeEnabled ? darkColor : lightColor
+        isDarkModeEnabled ? darkColor : lightColor
     }
     
     var primaryBackgroundColor: UIColor {
-        return isDarkModeEnabled ? darkColor : lightColor
+        isDarkModeEnabled ? darkColor : lightColor
     }
     
     var secondaryBackgroundColor: UIColor {
-        return isDarkModeEnabled ? lightColor : darkColor
+        isDarkModeEnabled ? lightColor : darkColor
     }
     
     var imageTintColor: UIColor {
-        return isDarkModeEnabled ? lightColor : darkColor
+        isDarkModeEnabled ? lightColor : darkColor
     }
 }
